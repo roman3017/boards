@@ -23,6 +23,12 @@ class TE0714(Xilinx7SeriesPlatform):
 
     def toolchain_prepare(self, fragment, name, **kwargs):
         overrides = {
+            # The below error/warning allows us to use an internal clock as the
+            # reference for the SERDES blocks
+            "script_after_synth":
+            """
+            set_property SEVERITY WARNING [get_drc_checks REQP-49] 
+            """,
             "script_before_bitstream":
                 """
 		set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
