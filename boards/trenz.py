@@ -39,6 +39,7 @@ class TE0714(Xilinx7SeriesPlatform):
                 set_property CFGBVS VCCO [current_design]
                 set_property CONFIG_VOLTAGE 3.3 [current_design]
                 create_clock -period 4.0 [get_pins -filter {REF_PIN_NAME=~*RXOUTCLK} -of_objects [get_cells -hierarchical -filter {NAME =~ *gtp*}]]
+                create_clock -period 4.0 [get_pins -filter {REF_PIN_NAME=~*TXOUTCLK} -of_objects [get_cells -hierarchical -filter {NAME =~ *gtp*}]]
                 """
         }
         return super().toolchain_prepare(fragment, name, **overrides, **kwargs)
